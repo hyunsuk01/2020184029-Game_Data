@@ -42,10 +42,29 @@ def create_new_world():
     server.boy = Boy(server.background.w/2, server.background.h/2)
     game_world.add_object(server.boy, 1)
 
+    #하드 코딩
+    # game_world.add_object(Zombie('zwi', 3800, 2560, 1.0), 1)
+    # game_world.add_object(Zombie('jeni', 4000, 2560, 2.0), 1)
+    # game_world.add_object(Zombie('jisu', 5000, 2560, 0.5), 1)
     # fill here
+    #진짜 소프트 코딩
+    with open('zombie_data.json', 'r') as f: #파일을 오픈해서, f에 연결
+        zombie_data_list = json.load(f)
+        for item in zombie_data_list: # item : dictionary data
+            # zombie = Zombie(item['name'], item['x'], item['y'], item['size'])
+            zombie = Zombie()
+            zombie.__dict__.update(item)
+            game_world.add_object(zombie, 1)
+
 
 
 def load_saved_world():
+    game_world.load() #게임 모든 객체들이 다 로드가 된 상태.
+    for o in game_world.all_objects():
+        if isinstance(o, Boy): # o가 Boy 객체인가?
+            server.boy = o
+        elif isinstance(o, Background):
+            server.background = o
     pass
 
 

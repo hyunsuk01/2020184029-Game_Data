@@ -15,10 +15,12 @@ class FixedBackground:
 
     def __getstate__(self):
         # fill here
+        return {} # background는 따로 저장해야될, 변화하는 정보가 없기 때문에,
         pass
 
     def __setstate__(self, state):
         # fill here
+        self.__init__()
         pass
 
 

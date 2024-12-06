@@ -209,10 +209,15 @@ class Boy:
 
     def __getstate__(self):
         # fill here
+        #저장이 필요한 정보만 딕셔너리화 시킨다.
+        info = {'x':self.x, 'y':self.y}
+        return info
         pass
 
-    def __setstate__(self, state):
+    def __setstate__(self, state): #state를 통해서 저장해둔, 값이 넘어온다
         # fill here
+        self.__init__() # 피클링되지 않았던 정보들은 그냥 초기값으로 생성하게 해준다.
+        self.__dict__.update(state) #x, y만 채워지게 된다.
         pass
 
 

@@ -76,3 +76,21 @@ def handle_collisions():
                     a.handle_collision(group, b)
                     b.handle_collision(group, a)
 
+
+def save():
+    game_data = [world, collision_pairs] # 게임 월드 정보와 충돌 관련 정보를 묶은 리스트
+    with open('game.save','wb') as f:
+        pickle.dump(game_data, f)
+
+def load():
+    global world, collision_pairs
+    with open('game.save', 'rb') as f:
+        game_data = pickle.load(f)
+        world, collision_pairs = game_data
+
+def all_objects(): #게임 내 모든 객체들을 리스트로 넘겨준다.
+    world_objects = []
+    for layer in world:
+        for o in layer:
+            world_objects.append(o)
+    return world_objects
